@@ -3,14 +3,11 @@ const app = express();
 const bodyParser  = require('body-parser');
 const port = process.envPORT || 3001;
 const puppeteer = require('puppeteer');
+const cors = require('cors');
+let books = [];
 
-let books = [{
-    rank: '#40',
-    name: 'Demanding Boss',
-    author: 'Clara Reese',
-    rating: '4.1 out of 5 stars',
-    price: '$3.99'
-  }];
+app.use(cors())
+app.use(bodyParser.json())
 
 const generateId = () => {
     const maxId = books.length > 0 ? 
@@ -19,8 +16,7 @@ const generateId = () => {
     return maxId + 1
   }
   
-  app.use(bodyParser.json())
-  
+ 
   app.get('/',(request,response) => {
       //response.send('<h1>Hello World!</h1>')
       const url = 'https://www.amazon.com/gp/bestsellers/digital-text/6487835011/ref=pd_zg_hrsr_digital-text';
@@ -65,42 +61,26 @@ const generateId = () => {
             book.rating = infoArr[3]; //Current Amazon rating of book
             book.price = infoArr[6]; //Current price of book
             bookList = bookList.concat(book);
-        }
+          }
         return bookList;
       })
       //console.log('Result:', result);
       await browser.close();
 
-      response.send(result)
+      response.send(result);
       })
-  
-      //compile search results
-  
-      // const bookLists = new Promise((resolve,reject) => {
-      //     scraper
-      //     .fetchBestSellingList()
-      //     .then(data =>{
-      //         resolve(data)
-      //       })
-      //       .
-      // })
-
-      // Promise.all([bookLists]
-      //   .then(data => {
-      //       response.render('index', {data: {books: data[0]}})
-      //   }))
   });
   
   app.post('/books',(request,response) => {
-      const body = request.body
+      const body = request.body;
       if(!body){
         return response.status(400).json({
           error: 'content missing'
         })
       } 
   
-      const book = {    
-          rank: body.rank,
+      const book = {
+        rank: body.rank,
         name: body.name,
         author: body.author,
         rating: body.rating,
@@ -108,9 +88,9 @@ const generateId = () => {
         id: generateId(),
       }
       
-      books = books.concat(book)
-      response.json(book)
-      console.log(book)
+      books = books.concat(book);
+      response.json(book);
+      console.log(book);
       //console.log(request.headers)
   });
   
@@ -120,9 +100,9 @@ const generateId = () => {
   });
   app.get('/books/:id', (request, response) => {
     const id = Number(request.params.id)
-    console.log(id)
+    //console.log(id)
     const book = books.find(book => book.id === id)
-    console.log(book)
+    //console.log(book)
     if(book){
       response.json(book)
     } else {

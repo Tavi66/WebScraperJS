@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "json-server": "^0.16.1",
     "puppeteer": "^3.3.0",
@@ -20,9 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "watch": "nodemon _index.js",
-    "serverE": "node _index.js",
-    "server": "json-server -p3001 db.json"
+    "watch": "nodemon server.js",
+    "server": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

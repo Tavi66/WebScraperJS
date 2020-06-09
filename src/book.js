@@ -1,7 +1,4 @@
 //Axios
-const axios = require('axios');
-const baseUrl = 'http://localhost:3001/books';
-
 //puppeteer 
 //import * as puppeteer from 'puppeteer';
 const puppeteer = require('puppeteer');
