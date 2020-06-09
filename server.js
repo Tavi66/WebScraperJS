@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const bodyParser  = require('body-parser');
@@ -18,7 +19,6 @@ const generateId = () => {
   
  
   app.get('/',(request,response) => {
-      //response.send('<h1>Hello World!</h1>')
       const url = 'https://www.amazon.com/gp/bestsellers/digital-text/6487835011/ref=pd_zg_hrsr_digital-text';
       // const browser = await puppeteer.launch({
       //     headless: false, //false: displays chrome instance running

@@ -3,11 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
-//import bookService from './services/books'
-    
-
+import bookService from './services/books';
 //Display Info
-//Code to save to db.json //Eventually save to MongoDB
+//Code to save 
 
 function App() {
 const baseUrl = "http://localhost:3001/";
@@ -30,31 +28,32 @@ const headers = {
     });  
 
   bookList.then(element => {
-    setBooks(books.push(element));
-    console.log('book: ', books);
-  console.log('books: ', books);
-  //tranverse the book list then add to JSON DB
+    setBooks(books.concat(element));
+    //console.log('book: ', books);
+  //console.log('books: ', books);
+  //tranverse the book list then POST to express backend
   books.forEach(element => {
-    //console.log(axios.post(url,element));
     element.forEach(response => {
           axios.post(url,response);
-          //console.log('element: ', response);
+          bookService
+          .create(response)
+          .then(response => {
+            //console.log(response);
+            setBooks(books.concat(response));
+          });
     })
     });
 
   }).catch(error=>console.log('error: ',error));
 
-  //  axios.post(url,response)
-  //   .catch(error => console.log(error));
-//  bookList.then(book => {
-//    axios.post(url,book)
-//     .then(response => {
-//       console.log('promise fulfilled');
-//     })
-//     .catch(error => console.log(error));
-//   });
   },[]);
-    
+
+  const addBook = () => {
+            console.log('books (from addBook() ): ', books);
+  };
+
+  addBook();
+
   return (
     <div className="App">
       <header className="App-header">
