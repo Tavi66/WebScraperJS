@@ -1,25 +1,18 @@
-var message = 'Hello World!';
-console.log(message);
+//Axios
+const axios = require('axios');
+const baseUrl = 'http://localhost:3001/books';
 
-//puppeteer Scrape
-
-//product info object structure
-const productObj =
-{
-    product: 'Product Name',
-    url: 'https://url.of.product.com/',
-    image: 'https://url.of.product.com/image.jpg',
-    price: '$100',
-}
-
+//puppeteer 
+//import * as puppeteer from 'puppeteer';
 const puppeteer = require('puppeteer');
-
 //Amazon Top 50 Lesbian Ebooks
-const url = 'https://www.amazon.com/gp/bestsellers/digital-text/6487835011/ref=pd_zg_hrsr_digital-text';
+///const url = 'https://www.amazon.com/gp/bestsellers/digital-text/6487835011/ref=pd_zg_hrsr_digital-text';
 
-async function fetchProductList(url) {
+//Get best selling items' info 
+async function fetchBestSellingList() {
+const url = 'https://www.amazon.com/gp/bestsellers/digital-text/6487835011/ref=pd_zg_hrsr_digital-text';
     const browser = await puppeteer.launch({
-        headless: true, //false: displays chrome instance running
+        headless: false, //false: displays chrome instance running
         defaultViewport: null, //(optional) useful in headless mode
     });
 
@@ -35,6 +28,7 @@ async function fetchProductList(url) {
       let bookList = [];
 
       for(let i = 0;  i < totalSearchResults - 1; i++) {
+         //book info object structure
           let book = {
               rank: '',
               name: '',
@@ -61,11 +55,39 @@ async function fetchProductList(url) {
           book.rating = infoArr[3]; //Current Amazon rating of book
           book.price = infoArr[6]; //Current price of book
           bookList = bookList.concat(book);
-    
       }
       return bookList;
     })
-    console.log('Result:', result);
+    //console.log('Result:', result);
+    await browser.close();
+    return result;
 };
 
-fetchProductList(url);
+//let bookList = fetchBestSellingList(url);
+
+// bookList.then(response => {
+//   //console.log('response: ',response);
+//   response.forEach(book => {
+//     //const request = axios.post(baseUrl, book);
+//     console.log(book);
+//     // axios.post(baseUrl,book)
+//     // .then(response => console.log(response))
+//     // .catch(error=>console.log(error));
+//     //list.concat(book);
+//   })
+// });
+// axios.get(baseUrl)
+// .then(response => console.log('response: ', response.data))
+// .catch(console.log('error'));
+// const create = newObject => {
+//   const request = axios.post(baseUrl, newObject)
+//   return request.then(response => response.data)
+// }
+
+// async function addBook()
+// {return await axios
+
+// .catch(console.log('error adding entry.'));}
+// addBook();
+
+//  console.log('booklist: ', list);

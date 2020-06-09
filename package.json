@@ -1,15 +1,45 @@
 {
-  "name": "webscrapernodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "index":"node index.js",
-    "start":"node app.js"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "web_scraper_nodejs",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "puppeteer": "^3.3.0"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "json-server": "^0.16.1",
+    "puppeteer": "^3.3.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1"
+  },
+  "scripts": {
+    "fetch-books": "node src/book.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "watch": "nodemon _index.js",
+    "serverE": "node _index.js",
+    "server": "json-server -p3001 db.json"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
