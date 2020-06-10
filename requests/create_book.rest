@@ -1,10 +1,39 @@
-POST http://localhost:3001/books
-Content-Type: application/json
+POST http://localhost:3001/api/books
 
-{
-"rank":"#1",
-"name":"The Woman in 3B",
-"author":"Eliza Lentzski",
-"rating":"4.7 out of 5 stars",
-"price":"$3.99"
-}
+[
+    {
+    rank: "#44",
+    name: "Rough Around The Edges",
+    author: "Crystal Chard",
+    rating: "4.8 out of 5 stars",
+    price: "$6.99"
+  },
+  {
+    rank: "#45",
+    name: "Goode Girls Steal: A Lesbian Romance Series (A…",
+    author: "J.J. Arias",
+    rating: "4.6 out of 5 stars",
+    price: "$3.99"
+  },
+  {
+    rank: "#46",
+    name: "Then & Now",
+    author: "Monica McCallan",
+    rating: "4.9 out of 5 stars",
+    price: "$4.99"
+  },
+  {
+    rank: "#47",
+    name: "Don't Cry for Me (Midnight in Manhattan Book 1)",
+    author: "Rachel Lacey",
+    rating: "4.7 out of 5 stars",
+    price: "$4.99"
+  },
+  {
+    rank: "#48",
+    name: "The Art of Pretending (Trope-ily Ever After Book 1)",
+    author: "Raquel De Leon",
+    rating: "4.5 out of 5 stars",
+    price: "$0.99"
+  },
+]
