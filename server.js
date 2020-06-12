@@ -84,10 +84,11 @@ app.use(bodyParser.json());
       collection.find({})
       .toArray(function(error, result) {
         console.log('Retrieving Documents...');
-        if (error) throw error;
-        console.log(result);
-        response.send(result);
+        if (error) { client.close();
+          throw error;}
+        //console.log(result);
         console.log('Retrieved Documents!');
+        response.send(result);
       })
     });
     client.close();
@@ -131,8 +132,9 @@ app.use(bodyParser.json());
       for(let i = 0;  i < totalSearchResults - 1; i++) {
          //book info object structure
           let book = {
+             _id:"",
               rank: "",
-              name: "",
+              //name: "",
               author: "",
               rating: "",
               //published: '',
@@ -150,8 +152,9 @@ app.use(bodyParser.json());
         let infoArr = Array.from(productsDetails[i].split("\n"));
 
         //Save book data to book object
+          book._id =  infoArr[1];
           book.rank = infoArr[0]; //best-selling rank
-          book.name = infoArr[1]; //Title of book
+          //book.name = infoArr[1]; //Title of book
           book.author = infoArr[2]; //Author of book
           book.rating = infoArr[3]; //Current Amazon rating of book
           book.price = infoArr[6]; //Current price of book
@@ -186,9 +189,10 @@ app.use(bodyParser.json());
       for(let i = 0;  i < totalSearchResults - 1; i++) {
          //book info object structure
           let item = {
+            _id: "",
             info: "",
               rank: "",
-              name: "",
+              //name: "",
               rating: "",
               //published: '',
               //description: '',
@@ -205,8 +209,9 @@ app.use(bodyParser.json());
         let infoArr = Array.from(productsDetails[i].split("\n"));//
 
         //Save product data to book object
-        item.rank = infoArr[0]; //best-selling rank
-          item.name = infoArr[1]; //Title of book
+          item._id = infoArr[1]; //id of book
+          item.rank = infoArr[0]; //best-selling rank
+          //item.name = infoArr[1]; //Title of book
           item.rating = infoArr[2]; //Current Amazon rating of book
           item.price = infoArr[4]; //Current price of book
           list = list.concat(item);

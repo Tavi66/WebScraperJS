@@ -3,6 +3,7 @@ Content-Type: application/json
 
 [
   {
+    "_id": "Rough Around The Edges",
     "rank": "#00",
     "name": "Rough Around The Edges",
     "author": "Crystal Chard",
@@ -10,6 +11,7 @@ Content-Type: application/json
     "price": "$6.99"
   },
   {
+    "_id": "Goode Girls Steal: A Lesbian Romance Series (A…",
     "rank": "#00",
     "name": "Goode Girls Steal: A Lesbian Romance Series (A…",
     "author": "J.J. Arias",
