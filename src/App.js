@@ -17,7 +17,7 @@ const AddBooks = ({books}) => {
 
 function App() {
 const baseUrl = "http://localhost:3001/";
-const url = "http://localhost:3001/api/books";
+let url = "api";
 const headers = {
   "Content-Type": "application/json"
 }
@@ -26,10 +26,11 @@ const headers = {
 //Access express backend
 
   const [books, setBooks] = useState([]);
+  const [products, setProducts] = useState([]);
   const [list, setList] = useState([]);
 
   useEffect(()=>{
-    console.log('effects for books');
+    console.log('useEffect for app');
     //const bookList = bookService.scrape(baseUrl);
     // console.log('Scraping books...');
     // const bookList = axios.get(baseUrl, headers)
@@ -49,34 +50,10 @@ const headers = {
   
   },[]);
   
-
-  // const addBooks = () => {
-  //           console.log('books (from addBook() ): ', books);
-  //           if(books.length === 49)
-  //           {
-  //             axios.post(url,books)
-  //           .then(response => console.log('Adding book to DB...'))
-  //           .catch(error => console.log(error));
-
-  //           setBooks(books.concat({name:''}));
-  //         }
-         
-  
-  // }; 
-
-  const addBooks = () => {
-    console.log('books (fun): ', books);
-    axios.post(url,books)
-     .then(response => console.log('Adding book to DB...'))
-     .catch(error => console.log(error));
-     setList(books);
-
-  }
-
   const scrapeBooks = () => { 
-    console.log('empty scrape function');
     console.log('Scraping books...');
-    const bookList = axios.get(baseUrl, headers)
+    url = baseUrl.concat('books');
+    const bookList = axios.get(url, headers)
     .then(response => {
       //console.log(response.data);
         console.log('books scraped!');  
@@ -89,6 +66,15 @@ const headers = {
       setBooks(element);
       console.log('books saved to array!')
     });
+  }
+
+  const addBooks = () => {
+    console.log('books (fun): ', books);
+    url = baseUrl.concat('api/books');
+    axios.post(url,books)
+     .then(response => console.log('Adding book to DB...'))
+     .catch(error => console.log(error));
+     setList(books);
 
   }
   
@@ -98,11 +84,31 @@ const headers = {
     books !== list ? addBooks(): console.log('Books added already!');
   }
 
+  const scrapeTopElectronics = () => {
+    console.log('Scraping top electronics...');
+    url = baseUrl.concat('tech');
+    const itemList = axios.get(url, headers)
+    .then(response => {
+      //console.log(response.data);
+        console.log('tech scraped!');  
+        return response.data;  
+      })
+      .catch(error=>console.log('error: ',error)); 
+
+    itemList.then(element => {
+      console.log(element);
+      setProducts(element);
+      console.log('tech saved to array!')
+    });
+
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Books</h2>
+        <button onClick={() => scrapeTopElectronics()}>Scrape Electronics </button>
         <button onClick={() => scrapeBooks()}>Scrape Books</button>
         <button onClick={() => handleAddBook()}>Add Books</button> 
         <AddBooks books={books}/>
